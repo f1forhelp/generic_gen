@@ -1,5 +1,7 @@
 import 'package:args/args.dart';
 
+part '../bin/src/cli_parser.dart';
+
 const String version = '0.0.1';
 
 ArgParser buildParser() {
@@ -36,7 +38,8 @@ void main(List<String> arguments) {
 
     // Process the parsed arguments.
     if (results.wasParsed('help')) {
-      printUsage(argParser);
+      print('HELP-HELP');
+      // printUsage(argParser);
       return;
     }
     if (results.wasParsed('version')) {
