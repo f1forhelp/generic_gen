@@ -1,64 +1,19 @@
 import 'package:args/args.dart';
+import 'dart:convert';
+import 'dart:io';
 
-part '../bin/src/cli_parser.dart';
+part 'src/cli_parser.dart';
+part 'src/generator.dart';
+part 'src/utils.dart';
+part 'src/models/generic_gen.dart';
 
-const String version = '0.0.1';
+void main(List<String> arguments) async {
+  final _CliParser argParser = _CliParser();
 
-ArgParser buildParser() {
-  return ArgParser()
-    ..addFlag(
-      'help',
-      abbr: 'h',
-      negatable: false,
-      help: 'Print this usage information.',
-    )
-    ..addFlag(
-      'verbose',
-      abbr: 'v',
-      negatable: false,
-      help: 'Show additional command output.',
-    )
-    ..addFlag(
-      'version',
-      negatable: false,
-      help: 'Print the tool version.',
-    );
-}
-
-void printUsage(ArgParser argParser) {
-  print('Usage: dart generic_gen.dart <flags> [arguments]');
-  print(argParser.usage);
-}
-
-void main(List<String> arguments) {
-  final ArgParser argParser = buildParser();
-  try {
-    final ArgResults results = argParser.parse(arguments);
-    bool verbose = false;
-
-    // Process the parsed arguments.
-    if (results.wasParsed('help')) {
-      print('HELP-HELP');
-      // printUsage(argParser);
-      return;
-    }
-    if (results.wasParsed('version')) {
-      print('generic_gen version: $version');
-      return;
-    }
-    if (results.wasParsed('verbose')) {
-      verbose = true;
-    }
-
-    // Act on the arguments provided.
-    print('Positional arguments: ${results.rest}');
-    if (verbose) {
-      print('[VERBOSE] All arguments: ${results.arguments}');
-    }
-  } on FormatException catch (e) {
-    // Print usage information if an invalid argument was provided.
-    print(e.message);
-    print('');
-    printUsage(argParser);
-  }
+  SourceGenConf sourceGenConf = await _Utils.parseSourceGen();
+  print("======Source Gen Conf======");
+  print("${sourceGenConf.toJson()}");
+  print("===========================");
+  final _Generator generator = _Generator(sourceGenConf);
+  argParser.parse(arguments, generator: generator);
 }

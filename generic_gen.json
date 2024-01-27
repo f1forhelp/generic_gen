@@ -1,0 +1,6 @@
+{
+    "sourceDir": "src-gen",
+    "sourceGenDirs": [
+        "src/main/java"
+    ]
+}

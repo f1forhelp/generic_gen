@@ -1,3 +1,64 @@
 # https://dart.dev/guides/libraries/private-files
-# Created by `dart pub`
+
+# Flutter/Dart specific
+*.iml
 .dart_tool/
+.pub/
+build/
+.dart_plugins
+.flutter-plugins
+.flutter-plugins-dependencies
+.idea/
+.vscode/
+*.g.dart
+.dart_tool/
+
+# Gradle files
+**/android/*/build/
+**/android/*/captures/
+**/android/*/gradle-wrapper.jar
+
+# Android
+**/android/**/gradle-wrapper.jar
+**/android/**/.gradle
+**/android/**/local.properties
+**/android/**/GeneratedPluginRegistrant.*
+
+# iOS
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Flutter.framework/
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/App.framework/
+**/ios/Flutter/Flutter.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/Debug.xcconfig
+**/ios/Flutter/Release.xcconfig
+**/ios/.generated/
+
+# Web
+**/webdev/
+**/build/
+
+# Flutter package dependencies
+**/.dart_tool/build/
+**/.dart_tool/package_config.json
+**/.dart_tool/package_config_subset
+
+# Dart packages
+**/packages/
+**/*.pub-cache/
+**/.dart_tool/
+
+# VS Code
+.vscode/
+
+# Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+*.ids
+*.code-workspace
+/.idea/
+/.vscode/
