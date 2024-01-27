@@ -4,7 +4,7 @@ class _Utils {
   _Utils._();
 
   static Future<SourceGenConf> parseSourceGen() async {
-    final File sourceGenFile = File('generic_gen.json');
+    final File sourceGenFile = File('${p.current}/generic_gen.json');
     if (!await sourceGenFile.exists()) {
       throw Exception('generic_gen.json not found');
     }

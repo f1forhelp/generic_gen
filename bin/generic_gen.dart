@@ -1,6 +1,7 @@
 import 'package:args/args.dart';
 import 'dart:convert';
 import 'dart:io';
+import 'package:path/path.dart' as p;
 
 part 'src/cli_parser.dart';
 part 'src/generator.dart';
