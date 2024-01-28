@@ -7,17 +7,17 @@ class _Generator {
 
   void generate(String templateName) {
     final _Template? template = sourceGenConf.template
-        ?.firstWhereOrNull((element) => element.templateName == templateName);
+        .firstWhereOrNull((element) => element.templateName == templateName);
     if (template == null) {
       throw Exception('Template $templateName not found');
     }
 
-    _copyContent(template.source!, template.op!);
+    _copyContent(template.source, template.op);
 
     _extensionMapping(
-        path: template.op!, extensions: sourceGenConf.extensionMapping!);
+        path: template.op, extensions: sourceGenConf.extensionMapping);
     _identifierMapping(
-        path: template.op!, identifiers: template.identifierMapping!);
+        path: template.op, identifiers: template.identifierMapping);
   }
 
   void _copyContent(String sourcePath, String destinationPath) {
@@ -64,7 +64,7 @@ class _Generator {
         );
         if (mapping != null) {
           fs.rename(
-              '${fs.parent.path}/${fs.uri.pathSegments.last.replaceAll('.${extension}', '.${mapping.replaceWith}')}');
+              '${fs.parent.path}/${fs.uri.pathSegments.last.replaceAll('.$extension', '.${mapping.replaceWith}')}');
         }
       } else {
         _extensionMapping(path: fs.path, extensions: extensions);
@@ -86,8 +86,7 @@ class _Generator {
       if (fs is File) {
         String content = fs.readAsStringSync();
         for (var identifier in identifiers) {
-          content =
-              content.replaceAll(identifier.name!, identifier.replaceWith!);
+          content = content.replaceAll(identifier.name, identifier.replaceWith);
         }
         fs.writeAsStringSync(content);
       } else {
@@ -100,7 +99,7 @@ class _Generator {
           _Utils.logError(folderName);
           for (var identi in identifiers) {
             if (folderName == identi.name) {
-              _Utils.logError(identi.replaceWith!);
+              _Utils.logError(identi.replaceWith);
               fs.rename('${fs.parent.path}/${identi.replaceWith}');
               break;
             }
