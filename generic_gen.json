@@ -16,6 +16,9 @@
                 {
                     "name": "controller",
                     "replaceWith": "controllerPP"
+                },{
+                    "name": "testProvider",
+                    "replaceWith": "testProviderPP"
                 }
             ]
         }

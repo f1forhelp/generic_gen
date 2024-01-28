@@ -37,7 +37,6 @@ class _Generator {
 
     // Iterate through each file or directory and copy to the destination
     for (var element in entities) {
-      _Utils.logSuccess(element.toString());
       if (element is File) {
         File(element.path).copySync(
             '${destinationDir.path}/${element.uri.pathSegments.last}');
@@ -93,6 +92,24 @@ class _Generator {
         fs.writeAsStringSync(content);
       } else {
         _identifierMapping(path: fs.path, identifiers: identifiers);
+
+        _Utils.logSuccess(fs.uri.pathSegments.toString());
+        if (fs.uri.pathSegments.length >= 2) {
+          String folderName =
+              fs.uri.pathSegments[fs.uri.pathSegments.length - 2];
+          _Utils.logError(folderName);
+          for (var identi in identifiers) {
+            if (folderName == identi.name) {
+              _Utils.logError(identi.replaceWith!);
+              fs.rename('${fs.parent.path}/${identi.replaceWith}');
+              break;
+            }
+          }
+
+          // fs.rename(
+          //     '${fs.parent.path}/${fs.uri.pathSegments[fs.uri.pathSegments.length - 2]}');
+        }
+
         // for (var identifier in identifiers) {
         //   if (fs.uri.pathSegments.last == identifier.name) {
         //     fs.renameSync(identifier.replaceWith!);
