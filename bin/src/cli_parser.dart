@@ -6,41 +6,31 @@ class _CliParser {
     ..addOption(
       "template",
       abbr: 't',
-      help: 'Generate a template with the given name',
       valueHelp: 'templateName',
-    )
-    ..addFlag(
-      'help',
-      abbr: 'h',
-      negatable: false,
-      help: 'Print this usage information.',
     );
 
   void printUsage() {
-    print('Usage: dart run generic_gen <flags> [arguments]');
-    print(_argParser.usage);
+    _Utils.logInfo('Usage: dart run generic_gen <flags> [arguments]');
+    _Utils.logInfo(_argParser.usage);
   }
 
   void parse(List<String> arguments, {required _Generator generator}) {
     try {
       final ArgResults results = _argParser.parse(arguments);
-
       // Process the parsed arguments.
       if (results.wasParsed('template')) {
-        print(results.arguments);
-        generator.generate("f1");
+        // get the template name
+        final String? templateName = results['template'];
+        if (templateName == null) {
+          _Utils.logError('Template name is required');
+          return;
+        }
+        generator.generate(templateName);
         return;
       }
-      if (results.wasParsed('help')) {
-        printUsage();
-        return;
-      }
-
-      // Act on the arguments provided.
-      print('Positional arguments: ${results.rest}');
     } on FormatException catch (e) {
       // Print usage information if an invalid argument was provided.
-      print(e.message);
+      _Utils.logError(e.message);
       print('');
       printUsage();
     }

@@ -7,32 +7,20 @@ class _Generator {
 
   void generate(String templateName) {
     final _Template? template = sourceGenConf.template
-        ?.firstWhere((element) => element.templateName == templateName);
-    if (template == null) {
-      throw Exception('Template $templateName not found');
-    }
-
-    _copyDirectory(template.source!, template.op!);
-
-    _extensionMapping(
-        path: template.op!, extensions: sourceGenConf.extensionMapping!);
-    _identifierMapping(
-        path: template.op!, identifiers: template.identifierMapping!);
-    // templateDir.
-  }
-
-  void generateWithName(String templateName) {
-    final _Template? template = sourceGenConf.template
         ?.firstWhereOrNull((element) => element.templateName == templateName);
     if (template == null) {
       throw Exception('Template $templateName not found');
     }
 
-    final Directory templateDir = Directory(template.source!);
-    // templateDir.
+    _copyContent(template.source!, template.op!);
+
+    _extensionMapping(
+        path: template.op!, extensions: sourceGenConf.extensionMapping!);
+    _identifierMapping(
+        path: template.op!, identifiers: template.identifierMapping!);
   }
 
-  void _copyDirectory(String sourcePath, String destinationPath) {
+  void _copyContent(String sourcePath, String destinationPath) {
     // Create a Directory object for the source directory
     Directory sourceDir = Directory(sourcePath);
 
@@ -49,12 +37,13 @@ class _Generator {
 
     // Iterate through each file or directory and copy to the destination
     for (var element in entities) {
+      _Utils.logSuccess(element.toString());
       if (element is File) {
         File(element.path).copySync(
             '${destinationDir.path}/${element.uri.pathSegments.last}');
       } else if (element is Directory) {
         if (element.uri.pathSegments.length >= 2) {
-          _copyDirectory(element.path,
+          _copyContent(element.path,
               '${destinationDir.path}/${element.uri.pathSegments[element.uri.pathSegments.length - 2]}');
         }
       }
@@ -92,6 +81,9 @@ class _Generator {
     List<FileSystemEntity> entities = sourceDir.listSync(recursive: false);
 
     for (var fs in entities) {
+      // _Utils.logInfo(fs.statSync().type == FileSystemEntityType.file
+      //     ? 'File: ${fs.uri.pathSegments.last}'
+      //     : 'Directory: ${fs.uri.pathSegments.last}');
       if (fs is File) {
         String content = fs.readAsStringSync();
         for (var identifier in identifiers) {
@@ -101,6 +93,11 @@ class _Generator {
         fs.writeAsStringSync(content);
       } else {
         _identifierMapping(path: fs.path, identifiers: identifiers);
+        // for (var identifier in identifiers) {
+        //   if (fs.uri.pathSegments.last == identifier.name) {
+        //     fs.renameSync(identifier.replaceWith!);
+        //   }
+        // }
       }
     }
   }

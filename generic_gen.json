@@ -12,6 +12,10 @@
                 {
                     "name": "sjdas",
                     "replaceWith": "Tatti"
+                },
+                {
+                    "name": "controller",
+                    "replaceWith": "controllerPP"
                 }
             ]
         }
