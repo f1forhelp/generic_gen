@@ -1,19 +1,116 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of "../../generic_gen.dart";
 
-class SourceGenConf {
-  final String sourceDir;
-  final List<String> sourceGenDirs;
+class _GenericGenConf {
+  List<_Template>? template;
+  List<_KeyValueMapping>? fileExtensionMapping;
+  List<_KeyValueMapping>? identifierMapping;
 
-  SourceGenConf({required this.sourceDir, required this.sourceGenDirs});
-
-  SourceGenConf.fromJson(Map<String, dynamic> json)
-      : sourceDir = json['sourceDir'],
-        sourceGenDirs = json['sourceGenDirs'].cast<String>();
+  _GenericGenConf.fromJson(Map<String, dynamic> json) {
+    if (json['template'] != null) {
+      template = <_Template>[];
+      json['template'].forEach((v) {
+        template!.add(_Template.fromJson(v));
+      });
+    }
+    if (json['fileExtensionMapping'] != null) {
+      fileExtensionMapping = <_KeyValueMapping>[];
+      json['fileExtensionMapping'].forEach((v) {
+        fileExtensionMapping!.add(_KeyValueMapping.fromJson(v));
+      });
+    }
+    if (json['identifierMapping'] != null) {
+      identifierMapping = <_KeyValueMapping>[];
+      json['identifierMapping'].forEach((v) {
+        identifierMapping!.add(_KeyValueMapping.fromJson(v));
+      });
+    }
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['sourceDir'] = sourceDir;
-    data['sourceGenDirs'] = sourceGenDirs;
+    if (template != null) {
+      data['template'] = template!.map((v) => v.toJson()).toList();
+    }
+    if (fileExtensionMapping != null) {
+      data['fileExtensionMapping'] =
+          fileExtensionMapping!.map((v) => v.toJson()).toList();
+    }
+    if (identifierMapping != null) {
+      data['identifierMapping'] =
+          identifierMapping!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
+
+class _Template {
+  String? templateName;
+  String? source;
+  String? op;
+  List<_KeyValueMapping>? identifierMapping;
+
+  _Template.fromJson(Map<String, dynamic> json) {
+    templateName = json['templateName'];
+    source = json['source'];
+    op = json['op'];
+    if (json['identifierMapping'] != null) {
+      identifierMapping = <_KeyValueMapping>[];
+      json['identifierMapping'].forEach((v) {
+        identifierMapping!.add(_KeyValueMapping.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['templateName'] = templateName;
+    data['source'] = source;
+    data['op'] = op;
+    if (identifierMapping != null) {
+      data['identifierMapping'] =
+          identifierMapping!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class _KeyValueMapping {
+  String? name;
+  String? replaceWith;
+
+  _KeyValueMapping.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    replaceWith = json['replaceWith'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['name'] = name;
+    data['replaceWith'] = replaceWith;
+    return data;
+  }
+}
+
+// For reference, here is the generic_gen.json file:
+// {
+//     "template": [
+//         {
+//             "templateName": "f1",
+//             "source": "custom_generator/f1",
+//             "op": "lib/",
+//             "identifierMapping": [
+//                 {
+//                     "name": "org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler",
+//                     "replaceWith": "org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler"
+//                 }
+//             ]
+//         }
+//     ],
+    // "fileExtensionMapping": [
+    //     {
+    //         "name": "org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler",
+    //         "replaceWith": "org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler"
+    //     }
+    // ]
+// }

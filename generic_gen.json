@@ -1,0 +1,23 @@
+{
+    "template": [
+        {
+            "templateName": "f1",
+            "source": "feature/test",
+            "op": "op/newFeature",
+            "identifierMapping": [
+                {
+                    "name": "TESTIDENTIFIER",
+                    "replaceWith": "TestIdentifier"
+                }
+            ]
+        }
+    ],
+    "fileExtensionMapping": [
+        {
+            "name": ".gg",
+            "replaceWith": ".dart"
+        }
+    ]
+}
+
+

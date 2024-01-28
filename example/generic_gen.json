@@ -1,6 +1,13 @@
 {
-    "sourceDir": "src-gen",
-    "sourceGenDirs": [
-        "src/main/java"
+    "schema": [
+        {
+            "name": "f1",
+            "source": "custom_generator/f1",
+            "op": "lib/",
+            "identifierMapping": {
+                "name": "org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler",
+                "replaceWith": "org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler"
+            }
+        }
     ]
 }
