@@ -3,17 +3,12 @@ part of "../generic_gen.dart";
 class _CliParser {
   final String version = '0.0.1';
   final ArgParser _argParser = ArgParser()
-    ..addMultiOption(
+    ..addOption(
       "template",
       abbr: 't',
-      help: 'Generate a template with the given name.',
+      help: 'Generate a template with the given name',
       valueHelp: 'templateName',
     )
-    // ..addFlag(
-    //   'template',
-    //   negatable: false,
-    //   help: 'Generate a template with the given name.',
-    // )
     ..addFlag(
       'help',
       abbr: 'h',
@@ -22,7 +17,7 @@ class _CliParser {
     );
 
   void printUsage() {
-    print('Usage: dart generic_gen.dart <flags> [arguments]');
+    print('Usage: dart run generic_gen <flags> [arguments]');
     print(_argParser.usage);
   }
 
@@ -32,7 +27,7 @@ class _CliParser {
 
       // Process the parsed arguments.
       if (results.wasParsed('template')) {
-        dev.log(results.rest.toString());
+        print(results.arguments);
         generator.generate("f1");
         return;
       }

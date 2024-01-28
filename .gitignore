@@ -62,3 +62,4 @@ build/
 *.code-workspace
 /.idea/
 /.vscode/
+pubspec.lock

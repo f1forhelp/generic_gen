@@ -1,5 +1,3 @@
-import 'dart:developer' as dev;
-
 import 'package:args/args.dart';
 import 'package:collection/collection.dart';
 import 'dart:convert';
@@ -15,9 +13,6 @@ void main(List<String> arguments) async {
   final _CliParser argParser = _CliParser();
 
   _GenericGenConf genericGenConf = await _Utils.parseSourceGen();
-  // print("======Source Gen Conf======");
-  // print("${genericGenConf.toString()}");
-  // print("===========================");
   final _Generator generator = _Generator(genericGenConf);
   argParser.parse(arguments, generator: generator);
 }
