@@ -14,3 +14,4 @@ flutter pub run generic_gen --help
 
 For local testing .
 
+dart run generic_gen --template=aaslas

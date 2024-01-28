@@ -1,13 +1,31 @@
 {
-    "schema": [
+    "template": [
         {
-            "name": "f1",
-            "source": "custom_generator/f1",
-            "op": "lib/",
-            "identifierMapping": {
-                "name": "org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler",
-                "replaceWith": "org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler"
-            }
+            "templateName": "f1",
+            "source": "feature/test",
+            "op": "op/newFeature",
+            "identifierMapping": [
+                {
+                    "name": "UserCredential",
+                    "replaceWith": "Tatti"
+                },
+                {
+                    "name": "sjdas",
+                    "replaceWith": "Tatti"
+                }
+            ]
+        }
+    ],
+    "extensionMapping": [
+        {
+            "name": "gg",
+            "replaceWith": "dart"
+        },
+        {
+            "name": "txt",
+            "replaceWith": "txttxt"
         }
     ]
 }
+
+

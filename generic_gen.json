@@ -6,16 +6,24 @@
             "op": "op/newFeature",
             "identifierMapping": [
                 {
-                    "name": "TESTIDENTIFIER",
-                    "replaceWith": "TestIdentifier"
+                    "name": "UserCredential",
+                    "replaceWith": "Tatti"
+                },
+                {
+                    "name": "sjdas",
+                    "replaceWith": "Tatti"
                 }
             ]
         }
     ],
-    "fileExtensionMapping": [
+    "extensionMapping": [
         {
-            "name": ".gg",
-            "replaceWith": ".dart"
+            "name": "gg",
+            "replaceWith": "dart"
+        },
+        {
+            "name": "txt",
+            "replaceWith": "txttxt"
         }
     ]
 }

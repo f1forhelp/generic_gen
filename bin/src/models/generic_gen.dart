@@ -3,7 +3,7 @@ part of "../../generic_gen.dart";
 
 class _GenericGenConf {
   List<_Template>? template;
-  List<_KeyValueMapping>? fileExtensionMapping;
+  List<_KeyValueMapping>? extensionMapping;
   List<_KeyValueMapping>? identifierMapping;
 
   _GenericGenConf.fromJson(Map<String, dynamic> json) {
@@ -13,10 +13,10 @@ class _GenericGenConf {
         template!.add(_Template.fromJson(v));
       });
     }
-    if (json['fileExtensionMapping'] != null) {
-      fileExtensionMapping = <_KeyValueMapping>[];
-      json['fileExtensionMapping'].forEach((v) {
-        fileExtensionMapping!.add(_KeyValueMapping.fromJson(v));
+    if (json['extensionMapping'] != null) {
+      extensionMapping = <_KeyValueMapping>[];
+      json['extensionMapping'].forEach((v) {
+        extensionMapping!.add(_KeyValueMapping.fromJson(v));
       });
     }
     if (json['identifierMapping'] != null) {
@@ -32,9 +32,9 @@ class _GenericGenConf {
     if (template != null) {
       data['template'] = template!.map((v) => v.toJson()).toList();
     }
-    if (fileExtensionMapping != null) {
-      data['fileExtensionMapping'] =
-          fileExtensionMapping!.map((v) => v.toJson()).toList();
+    if (extensionMapping != null) {
+      data['extensionMapping'] =
+          extensionMapping!.map((v) => v.toJson()).toList();
     }
     if (identifierMapping != null) {
       data['identifierMapping'] =
@@ -107,7 +107,7 @@ class _KeyValueMapping {
 //             ]
 //         }
 //     ],
-    // "fileExtensionMapping": [
+    // "extensionMapping": [
     //     {
     //         "name": "org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler",
     //         "replaceWith": "org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler"
