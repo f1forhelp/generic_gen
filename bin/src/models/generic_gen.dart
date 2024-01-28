@@ -2,93 +2,81 @@
 part of "../../generic_gen.dart";
 
 class _GenericGenConf {
-  List<_Template>? template;
-  List<_KeyValueMapping>? extensionMapping;
-  List<_KeyValueMapping>? identifierMapping;
+  late List<_Template> template;
+  late List<_KeyValueMapping> extensionMapping;
+  // late List<_KeyValueMapping> identifierMapping;
 
   _GenericGenConf.fromJson(Map<String, dynamic> json) {
     if (json['template'] != null) {
       template = <_Template>[];
       json['template'].forEach((v) {
-        template!.add(_Template.fromJson(v));
+        template.add(_Template.fromJson(v));
       });
+    } else {
+      throw Exception('template is required');
     }
     if (json['extensionMapping'] != null) {
       extensionMapping = <_KeyValueMapping>[];
       json['extensionMapping'].forEach((v) {
-        extensionMapping!.add(_KeyValueMapping.fromJson(v));
+        extensionMapping.add(_KeyValueMapping.fromJson(v));
       });
+    } else {
+      throw Exception('extensionMapping is required');
     }
-    if (json['identifierMapping'] != null) {
-      identifierMapping = <_KeyValueMapping>[];
-      json['identifierMapping'].forEach((v) {
-        identifierMapping!.add(_KeyValueMapping.fromJson(v));
-      });
-    }
-  }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    if (template != null) {
-      data['template'] = template!.map((v) => v.toJson()).toList();
-    }
-    if (extensionMapping != null) {
-      data['extensionMapping'] =
-          extensionMapping!.map((v) => v.toJson()).toList();
-    }
-    if (identifierMapping != null) {
-      data['identifierMapping'] =
-          identifierMapping!.map((v) => v.toJson()).toList();
-    }
-    return data;
+    // if (json['identifierMapping'] != null) {
+    //   identifierMapping = <_KeyValueMapping>[];
+    //   json['identifierMapping'].forEach((v) {
+    //     identifierMapping.add(_KeyValueMapping.fromJson(v));
+    //   });
+    // } else {
+    //   throw Exception('identifierMapping is required');
+    // }
   }
 }
 
 class _Template {
-  String? templateName;
-  String? source;
-  String? op;
-  List<_KeyValueMapping>? identifierMapping;
+  late String templateName;
+  late String source;
+  late String op;
+  late List<_KeyValueMapping> identifierMapping;
 
   _Template.fromJson(Map<String, dynamic> json) {
+    if (json['templateName'] == null) {
+      throw Exception('templateName is required');
+    } else if (json['source'] == null) {
+      throw Exception('source is required');
+    } else if (json['op'] == null) {
+      throw Exception('op is required');
+    } else if (json['identifierMapping'] == null) {
+      throw Exception('identifierMapping is required');
+    }
+
     templateName = json['templateName'];
     source = json['source'];
     op = json['op'];
     if (json['identifierMapping'] != null) {
       identifierMapping = <_KeyValueMapping>[];
       json['identifierMapping'].forEach((v) {
-        identifierMapping!.add(_KeyValueMapping.fromJson(v));
+        identifierMapping.add(_KeyValueMapping.fromJson(v));
       });
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['templateName'] = templateName;
-    data['source'] = source;
-    data['op'] = op;
-    if (identifierMapping != null) {
-      data['identifierMapping'] =
-          identifierMapping!.map((v) => v.toJson()).toList();
-    }
-    return data;
   }
 }
 
 class _KeyValueMapping {
-  String? name;
-  String? replaceWith;
+  late String name;
+  late String replaceWith;
 
   _KeyValueMapping.fromJson(Map<String, dynamic> json) {
+    if (json['name'] == null) {
+      throw Exception('name is required');
+    } else if (json['replaceWith'] == null) {
+      throw Exception('replaceWith is required');
+    }
+
     name = json['name'];
     replaceWith = json['replaceWith'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['name'] = name;
-    data['replaceWith'] = replaceWith;
-    return data;
   }
 }
 
