@@ -105,16 +105,7 @@ class _Generator {
               break;
             }
           }
-
-          // fs.rename(
-          //     '${fs.parent.path}/${fs.uri.pathSegments[fs.uri.pathSegments.length - 2]}');
         }
-
-        // for (var identifier in identifiers) {
-        //   if (fs.uri.pathSegments.last == identifier.name) {
-        //     fs.renameSync(identifier.replaceWith!);
-        //   }
-        // }
       }
     }
   }
