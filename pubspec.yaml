@@ -1,5 +1,7 @@
 name: generic_gen
 description: A sample command-line application with basic argument parsing.
+homepage: https://www.example.com
+repository: https://www.example.com
 version: 0.0.1
 # repository: https://github.com/my_org/my_repo
 
