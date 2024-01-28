@@ -3,7 +3,7 @@
         {
             "templateName": "f1",
             "source": "feature/test",
-            "op": "op/newFeature",
+            "op": "op/newFeatur2",
             "identifierMapping": [
                 {
                     "name": "UserCredential",
@@ -16,7 +16,8 @@
                 {
                     "name": "controller",
                     "replaceWith": "controllerPP"
-                },{
+                },
+                {
                     "name": "testProvider",
                     "replaceWith": "testProviderPP"
                 }
@@ -32,8 +33,5 @@
             "name": "txt",
             "replaceWith": "txttxt"
         }
-    ],
-    "identifierMapping":[]
+    ]
 }
-
-
